@@ -1,74 +1,159 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Dimensions  } from "react-native";
+import Swiper from "react-native-swiper";
+import { Button } from "react-native-paper";
+import { useRouter } from "expo-router";
+import * as Location from 'expo-location';
+import { getAuth  } from '@react-native-firebase/auth';
+import seedData from './db/seedData';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function OnboardingScreen() {
+  const router = useRouter();
+  const auth = getAuth()
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [initializing, setInitializing] = useState(true); // Track initialization state
+  const [user, setUser] = useState(null); // Track user state
 
-export default function HomeScreen() {
+  // Handle user state changes
+  function onAuthStateChanged(user: any) {
+    setUser(user);
+    if (initializing) setInitializing(false); // Only set once Firebase is ready
+  }
+  useEffect(() => {
+    //seedData();
+    const getCurrentLocation = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+      }
+    };
+    getCurrentLocation();
+  }, []);
+
+  useEffect(() => {
+
+    const subscriber = auth.onAuthStateChanged(onAuthStateChanged);
+    return subscriber;
+  }, []);
+  if (initializing) {
+    return <View />;
+  }
+  const onPressGetStarted = () => {
+    if (user) {
+      router.replace('/pages');
+    } else {
+      router.push("/auth/login");
+    }
+  };
+  
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      <Swiper
+        showsButtons={false}
+        dotStyle={styles.dot}
+        activeDotStyle={styles.activeDot}
+        paginationStyle={{ bottom: 100 }} // Position dots above the button
+      >
+        <View style={styles.slide}>
+          <View style={styles.textOverlay}>
+            <Text style={styles.title}>Find Professionals</Text>
+            <Text style={styles.text}>
+              Get trusted professionals for all your home and car needs.
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.slide}>
+          <View style={styles.textOverlay}>
+            <Text style={styles.title}>Easy Booking</Text>
+            <Text style={styles.text}>
+              Schedule appointments at your convenience.
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.slide}>
+          <View style={styles.textOverlay}>
+            <Text style={styles.title}>Secure Payments</Text>
+            <Text style={styles.text}>
+              Safe and secure payments for a hassle-free experience.
+            </Text>
+          </View>
+        </View>
+      </Swiper>
+
+      <View style={styles.buttonContainer}>
+        <Button
+          mode="contained"
+          onPress={onPressGetStarted}
+          style={styles.loginButton}
+        >
+          Get Started
+        </Button>
+      </View>
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  slide: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
+  image: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+    resizeMode: "cover",
+    position: "absolute",
+    top: 0,
+  },
+  textOverlay: {
+    position: "absolute",
+    bottom: 100, // Position text above the button
     left: 0,
-    position: 'absolute',
+    right: 0,
+    padding: 20,
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
+  },
+  text: {
+    fontSize: 16,
+    color: "#fff",
+    textAlign: "center",
+  },
+  buttonContainer: {
+    position: "absolute",
+    bottom: 20,
+    left: 0,
+    right: 0,
+    paddingHorizontal: 20,
+  },
+  loginButton: {
+    paddingVertical: 10,
+    backgroundColor: '#463458', 
+    borderRadius: 10,
+  },
+  dot: {
+    backgroundColor: "#E0E0E0",
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 4,
+  },
+  activeDot: {
+    backgroundColor: "#463458",
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginHorizontal: 4,
   },
 });

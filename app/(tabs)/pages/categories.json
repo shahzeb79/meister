@@ -1,0 +1,99 @@
+[
+    {
+        "name": "Renovation & Construction",
+        "id": 1,
+        "subcategories": [
+            "Plumbing Works",
+            "Ceilings",
+            "Floor",
+            "Tile Works",
+            "Doors",
+            "Windows",
+            "Roof & Facade Works",
+            "Insulation Works",
+            "Construction & Installation",
+            "Heating, Water Supply, Sewerage"
+        ]
+    },
+    {
+        "name": "Electrical",
+        "id": 2,
+        "subcategories": [
+            "Security System",
+            "Electrical Installation",
+            "Wiring",
+            "Door Bells"
+        ]
+    },
+    {
+        "name": "Cleaning & House Keeping",
+        "id": 3,
+        "subcategories": [
+            "Regular Cleaning",
+            "Deep Cleaning",
+            "Windows Cleaning",
+            "Garbage Removal",
+            "Cooking",
+            "Ironing Clothes",
+            "Dry Cleaning",
+            "Garden Maintenance",
+            "Nursing & Babysitters",
+            "Pets Care"
+        ]
+    },
+    {
+        "name": "Computer & Electronics",
+        "id": 4,
+        "subcategories": [
+            "Computer",
+            "Mobile Phone",
+            "Other Electronics"
+        ]
+    },
+    {
+        "name": "Design",
+        "id": 5,
+        "subcategories": [
+            "House Plan"
+        ]
+    },
+    {
+        "name": "Software Development",
+        "id": 6,
+        "subcategories": [
+            "App Development",
+            "General Software"
+        ]
+    },
+    {
+        "name": "Photos & Videos",
+        "id": 7,
+        "subcategories": [
+            "Editing",
+            "Shooting"
+        ]
+    },
+    {
+        "name": "Legal & Accounting",
+        "id": 8,
+        "subcategories": [
+            "Lawyer Services",
+            "Accountants"
+        ]
+    },
+    {
+        "name": "Tutor & Teaching",
+        "id": 9,
+        "subcategories": [
+            "Home Tutor"
+        ]
+    },
+    {
+        "name": "Car Repair",
+        "id": 10,
+        "subcategories": [
+            "Electrical",
+            "Mechanical"
+        ]
+    }
+]

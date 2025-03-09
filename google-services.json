@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "402166436116",
+    "project_id": "pro7-769aa",
+    "storage_bucket": "pro7-769aa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402166436116:android:1b446ee29e8ff439617201",
+        "android_client_info": {
+          "package_name": "com.repaitit.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "402166436116-4qqu6skht642pi98je9nqondof34lh2a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.repaitit.app",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "402166436116-21hm9jt82spfgkoa9nuij3g7m09acd24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7KWW6Yzf7KCqEwTp07fG_iBo_-epApys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "402166436116-21hm9jt82spfgkoa9nuij3g7m09acd24.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
