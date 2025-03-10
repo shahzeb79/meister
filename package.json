@@ -15,6 +15,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@appandflow/react-native-google-autocomplete": "^2.1.0",
     "@expo/vector-icons": "^14.0.2",
     "@nozbe/watermelondb": "^0.27.1",
     "@react-native-community/datetimepicker": "^8.3.0",
@@ -32,10 +33,12 @@
     "expo-dev-client": "~5.0.12",
     "expo-font": "~13.0.4",
     "expo-haptics": "~14.0.1",
+    "expo-image": "~2.0.6",
     "expo-image-picker": "~16.0.6",
     "expo-linear-gradient": "~14.0.2",
     "expo-linking": "~7.0.5",
     "expo-location": "^18.0.7",
+    "expo-maps": "^0.7.3",
     "expo-router": "~4.0.17",
     "expo-splash-screen": "~0.29.22",
     "expo-status-bar": "~2.0.1",
@@ -55,8 +58,7 @@
     "react-native-swiper": "^1.6.0",
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "~0.19.13",
-    "react-native-webview": "13.12.5",
-    "expo-image": "~2.0.6"
+    "react-native-webview": "13.12.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

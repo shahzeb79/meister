@@ -12,14 +12,14 @@ import seedData from '../db/seedData';
 
 export default function HomeScreen() {
   const router = useRouter();
-
+  
   useEffect(() => {
     const fetchCategories = async () => {
       // await database.write(async () => {
       //   await database.unsafeResetDatabase();
       // });
       
-      // seedData();
+      //seedData();
       // console.log("calling Seeddata")
       // const data = await categoriesCollection.query().fetch();
       // data.map(async (category) => {
@@ -53,6 +53,7 @@ export default function HomeScreen() {
         <ThemedText style={styles.categoryTitle}>View Categories  </ThemedText>
         <IconButton iconColor='#238ce6' icon="arrow-right" size={17} style={{bottom: 9, right: 20}}/>
         </TouchableOpacity>
+        
       </ThemedView>
       </ScrollView>
     </ThemedView>
