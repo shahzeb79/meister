@@ -6,7 +6,9 @@ import { useRouter } from "expo-router";
 import * as Location from 'expo-location';
 import { getAuth  } from '@react-native-firebase/auth';
 import seedData from './db/seedData';
-
+import GlobalBackground  from '@/components/GlobalBackground';
+import { ThemedText } from '@/components/ThemedText';
+const { width, height } = Dimensions.get("window");
 export default function OnboardingScreen() {
   const router = useRouter();
   const auth = getAuth()
@@ -47,41 +49,15 @@ export default function OnboardingScreen() {
   };
   
   return (
+    <GlobalBackground>
     <View style={styles.container}>
-      <Swiper
-        showsButtons={false}
-        dotStyle={styles.dot}
-        activeDotStyle={styles.activeDot}
-        paginationStyle={{ bottom: 100 }} // Position dots above the button
-      >
-        <View style={styles.slide}>
+  
           <View style={styles.textOverlay}>
-            <Text style={styles.title}>Find Professionals</Text>
-            <Text style={styles.text}>
+            <ThemedText style={styles.title}>Find Professionals</ThemedText>
+            <ThemedText style={styles.text}>
               Get trusted professionals for all your home and car needs.
-            </Text>
+            </ThemedText>
           </View>
-        </View>
-
-        <View style={styles.slide}>
-          <View style={styles.textOverlay}>
-            <Text style={styles.title}>Easy Booking</Text>
-            <Text style={styles.text}>
-              Schedule appointments at your convenience.
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.slide}>
-          <View style={styles.textOverlay}>
-            <Text style={styles.title}>Secure Payments</Text>
-            <Text style={styles.text}>
-              Safe and secure payments for a hassle-free experience.
-            </Text>
-          </View>
-        </View>
-      </Swiper>
-
       <View style={styles.buttonContainer}>
         <Button
           mode="contained"
@@ -91,48 +67,35 @@ export default function OnboardingScreen() {
           Get Started
         </Button>
       </View>
+      
     </View>
+    </GlobalBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
-  },
-  slide: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  image: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-    resizeMode: "cover",
-    position: "absolute",
-    top: 0,
   },
   textOverlay: {
-    position: "absolute",
-    bottom: 100, // Position text above the button
+    top: height * 0.76, // Position text above the button
     left: 0,
     right: 0,
     padding: 20,
   },
   title: {
     fontSize: 26,
+    padding:5,
     fontWeight: "bold",
-    color: "#fff",
     textAlign: "center",
   },
   text: {
     fontSize: 16,
-    color: "#fff",
+    padding:5,
     textAlign: "center",
   },
   buttonContainer: {
-    position: "absolute",
-    bottom: 20,
+    top: height * 0.76, // Position text above the button
     left: 0,
     right: 0,
     paddingHorizontal: 20,
@@ -141,19 +104,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     backgroundColor: '#463458', 
     borderRadius: 10,
-  },
-  dot: {
-    backgroundColor: "#E0E0E0",
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginHorizontal: 4,
-  },
-  activeDot: {
-    backgroundColor: "#463458",
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    marginHorizontal: 4,
-  },
+  }
+ 
 });

@@ -7,16 +7,10 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import Categories from '../model/Category';
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming, interpolateColor } from "react-native-reanimated";
 import database from '../db';
+import GlobalBackground  from '@/components/GlobalBackground';
 
 
 import { useNavigation, useRouter } from 'expo-router';
-// const getRandomLightColor = () => {
-//   // Function to generate random, distinct, and darker light colors (RGB values between 100 and 180)
-//   const r = Math.floor(Math.random() * 150) + 80;  // Random value between 100 and 180 for Red
-//   const g = Math.floor(Math.random() * 130) + 80;  // Random value between 100 and 180 for Green
-//   const b = Math.floor(Math.random() * 100) + 60;
-//   return `rgb(${r}, ${g}, ${b})`;
-// };
 const itemsx = [
   { id: "1" },
   { id: "2" },
@@ -44,7 +38,7 @@ const ItemList = () => {
     backgroundColor: interpolateColor(
       colorAnimation.value,
       [0, 1], // Interpolating between these values
-      ["#f2eef2", "#e0dde0"] // White → Light Grey
+      ["#f2eef2", "#e0dde7"] // White → Light Grey
     ),
   }));
   useEffect(() => {
@@ -79,7 +73,7 @@ const ItemList = () => {
       [router]
     );
   return (
-   
+   <GlobalBackground>
     <ThemedView style={styles.container}>
       <ThemedView style={styles.header}>
         <IconButton iconColor='#463458' icon="arrow-left" size={26} onPress={() => router.back()} />
@@ -123,8 +117,8 @@ const ItemList = () => {
               alignItems: "center",
               padding: 10,
               marginLeft: 10,
-              borderBottomWidth: 1,
-              borderBottomColor: "#ddd",
+              borderBottomWidth: 0.5,
+              borderBottomColor: "grey",
             }}
             onPress={() =>router.push(`/(tabs)/pages/${item.id}?name=${item.name}`)}
           >
@@ -139,22 +133,23 @@ const ItemList = () => {
                 justifyContent: "center",
               }}
             >
-              <Icon name={item.icon} size={18} color="white" />
+              <Icon name={item.icon} size={16} color="white" />
             </ThemedView>
 
-            <Text style={{ fontSize: 17, flex: 1 }}>{item.name}</Text>
-            <IconButton icon="chevron-right" size={22} iconColor="grey" />
+            <Text style={{ fontSize: 16, flex: 1 }}>{item.name}</Text>
+            <IconButton icon="chevron-right" size={20} iconColor="grey" />
           </TouchableOpacity>
         )}
       />
     </ThemedView>
+    </GlobalBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  header: { flexDirection: 'row', paddingTop: 10, marginLeft: 0, borderBottomWidth: 0.5, borderBottomColor: 'grey' },
+  header: { flexDirection: 'row', paddingTop: 10, marginLeft: 0, borderBottomWidth: 0.5, borderBottomColor: 'grey',backgroundColor: 'transparent' },
   headerTitle: { fontSize: 20, alignSelf: 'center', flex: 1, textAlign: 'center', marginRight: 55 },
-  container: { flex: 1, paddingTop: 25 },
+  container: { flex: 1, paddingTop: 25,backgroundColor: 'transparent' },
   animatedItem: {
     borderRadius: 10,
     overflow: "hidden",
@@ -167,7 +162,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     marginLeft: 20,
     borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
   },
 });
 

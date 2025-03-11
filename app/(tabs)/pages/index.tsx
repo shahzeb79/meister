@@ -4,6 +4,8 @@ import { useRouter } from 'expo-router';
 import { IconButton } from 'react-native-paper';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
+import GlobalBackground  from '@/components/GlobalBackground';
+
 import database from '../db';
 // import Categories from '../model/Category';
 import seedData from '../db/seedData';
@@ -19,7 +21,7 @@ export default function HomeScreen() {
       //   await database.unsafeResetDatabase();
       // });
       
-      //seedData();
+      seedData();
       // console.log("calling Seeddata")
       // const data = await categoriesCollection.query().fetch();
       // data.map(async (category) => {
@@ -34,6 +36,7 @@ export default function HomeScreen() {
     fetchCategories();
   }, []);
   return (
+    <GlobalBackground>
     <ThemedView style={styles.container} >
       
       <ThemedView style={styles.topBar}>
@@ -51,12 +54,13 @@ export default function HomeScreen() {
         <TextInput style={styles.searchBar} placeholder="Specialist or service" />
         <TouchableOpacity style={styles.card} onPress={() => router.push('/(tabs)/pages/categories')}>
         <ThemedText style={styles.categoryTitle}>View Categories  </ThemedText>
-        <IconButton iconColor='#238ce6' icon="arrow-right" size={17} style={{bottom: 9, right: 20}}/>
+        <IconButton iconColor='#238ce6' icon="arrow-right" size={19} style={{bottom: 9.2, right: 20}}/>
         </TouchableOpacity>
         
       </ThemedView>
       </ScrollView>
     </ThemedView>
+    </GlobalBackground>
   );
 }
 
@@ -64,32 +68,37 @@ const styles = StyleSheet.create({
  
   container: {
     flex:1,
-    backgroundColor: 'white'
+    backgroundColor: 'transparent'
+
   },
   topBar: {
     flexDirection: 'row',
     paddingTop: 35,
     justifyContent: 'space-between',
     backgroundColor: 'transparent'
+
   },
 
   title: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 13,
     paddingTop: 18,
     backgroundColor: 'transparent'
+
   },
   searchBar: {
-    backgroundColor: '#E0E0E0',
+    backgroundColor: 'rgba(220, 212, 212, 0.57)',
+    height: 50,
     borderRadius: 10,
-    padding: 10,
     marginVertical: 20,
+    paddingHorizontal:10
   },
   category: {
     marginBottom: 20,
   },
   categoryTitle: {
-    fontSize: 16,
-    color: '#238ce6'
+    paddingLeft: 2,
+    fontSize: 18,
+    color: 'rgb(14, 136, 244)'
   },
   card: {
     flexDirection: 'row',

@@ -5,7 +5,7 @@ import { ThemedView } from '@/components/ThemedView';
 import {
   useGoogleAutocomplete
 } from '@appandflow/react-native-google-autocomplete';
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 type Props = PropsWithChildren<{
     isVisible: boolean;
@@ -55,7 +55,7 @@ export default function LocationSearch({ isVisible, children, onClose }: Props){
 const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
-        justifyContent: 'center',      
+        justifyContent: 'center',    
     },
     modalContent: {
         margin: 20,
@@ -64,27 +64,21 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        shadowColor: '#fff',
         shadowOffset: {
-          width: 0,
-          height: 2,
+          width: 1,
+          height: 10,
         },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        elevation: 1,
       },
-  container: { flex: 1, paddingTop: 25 },
   card: {
     marginHorizontal: 10,
     borderRadius: 10,
     padding: 10,
     alignItems: 'flex-start',
   },
-  label: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
+
   input: {
     height: 50,
     alignItems: 'flex-start',

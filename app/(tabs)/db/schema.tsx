@@ -36,6 +36,7 @@ export default appSchema({
         { name: 'question', type: 'string' },
         { name: 'controltype', type: 'string' },
         { name: 'key', type: 'string' },
+        { name: 'data', type: 'string' },
         { name: 'subcategory_id', type: 'string', isIndexed: true }
       ]
     })

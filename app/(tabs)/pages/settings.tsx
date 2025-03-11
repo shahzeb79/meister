@@ -6,6 +6,7 @@ import { List, IconButton } from 'react-native-paper';
 import { useRouter, useNavigation } from 'expo-router';
 import { getAuth  } from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import GlobalBackground  from '@/components/GlobalBackground';
 
 
 const SettingsPage = () => {
@@ -20,6 +21,7 @@ const SettingsPage = () => {
       router.push('/auth/login');
     };
   return (
+    <GlobalBackground>
     <ThemedView style={styles.container}>
       {/* Back Button */}
       <ThemedView style={styles.header}>
@@ -28,43 +30,46 @@ const SettingsPage = () => {
       </ThemedView>
       {/* Title */}
       {/* List of Settings */}
-      <List.Section style={{paddingHorizontal: 20}}>
+      <List.Section style={{paddingHorizontal: 15}}>
         <List.Item
-          title="Смена пароля"
+          title="Security"
           left={() => <List.Icon icon="key" />}
-          style={{borderBottomColor: 'lightgrey', borderBottomWidth: 0.5, paddingVertical: 20}}
+          style={{ borderBottomWidth: 0.5,
+            borderBottomColor: "grey", paddingVertical: 12}}
           onPress={() => {}}
         />
         <List.Item
-          title="Команды Siri"
+          title="Notifications"
           left={() => <List.Icon icon="bullhorn" />}
-          style={{borderBottomColor: 'lightgrey', borderBottomWidth: 0.5,paddingVertical: 20}}
+          style={{ borderBottomWidth: 0.5,
+            borderBottomColor: "grey",paddingVertical: 12}}
           onPress={() => {}}
         />
       </List.Section>
 
       {/* Logout */}
       <TouchableOpacity style={styles.logoutButton} onPress={handleSignOut}>
-        <Text style={styles.logoutText}>Выйти из профиля</Text>
+        <Text style={styles.logoutText}>Sign Out</Text>
       </TouchableOpacity>
 
       {/* App Version */}
       <Text style={styles.versionText}>Версия приложения — 4.194.0 (2252903)</Text>
     </ThemedView>
+    </GlobalBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  header: { flexDirection: 'row', paddingTop: 10,marginLeft: 0,borderBottomWidth:0.5,borderBottomColor: 'grey' },
+  header: { flexDirection: 'row', paddingTop: 10,borderBottomWidth:0.5,borderBottomColor: 'grey',backgroundColor: 'transparent' },
   headerTitle: { fontSize: 20, alignSelf: 'center',flex: 1, textAlign:'center', marginRight: 55  },
-  container: { flex: 1, paddingTop: 25 },
+  container: { flex: 1, paddingTop: 25,backgroundColor: 'transparent' },
   logoutButton: {
-    marginTop: 20,
+    marginTop: 15,
     alignSelf: 'center',
   },
   logoutText: {
-    color: 'purple',
-    fontSize: 16,
+    color: '#463458',
+    fontSize: 17,
   },
   versionText: {
     textAlign: 'center',

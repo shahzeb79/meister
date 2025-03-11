@@ -8,7 +8,7 @@ const seedData = async () => {
         const controlTypes = ['textarea', 'dropdown', 'checkbox'];
         const randomIndex = Math.floor(Math.random() * controlTypes.length);
         return controlTypes[randomIndex];
-      };
+    };
     const jsonData = [
         {
             "name": "Renovation & Construction",
@@ -18,7 +18,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the plumbing issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -26,7 +29,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the ceiling issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -34,7 +40,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the floor issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -42,7 +51,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the tile work needed", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -50,7 +62,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the door issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -58,7 +73,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the window issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -66,7 +84,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the roof or facade issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -74,7 +95,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the insulation work needed", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -82,7 +106,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the construction or installation job", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -90,7 +117,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the heating, water, or sewerage issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 }
             ]
@@ -104,7 +134,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the security system issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -112,7 +145,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the electrical installation issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -120,7 +156,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the wiring issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -128,7 +167,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the doorbell issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 }
             ]
@@ -142,7 +184,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the cleaning job", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -150,7 +195,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the deep cleaning job", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -158,7 +206,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the window cleaning job", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -166,7 +217,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the garbage removal job", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -174,7 +228,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the cooking job", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -182,7 +239,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the ironing job", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -190,7 +250,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the dry cleaning job", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -198,7 +261,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the garden maintenance job", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -206,7 +272,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the nursing or babysitting job", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -214,7 +283,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the pet care needed", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 }
             ]
@@ -228,7 +300,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the computer issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -236,7 +311,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the mobile phone issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -244,7 +322,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the electronic issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 }
             ]
@@ -258,7 +339,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the house plan needs", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 }
             ]
@@ -272,7 +356,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the app development task", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -280,7 +367,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the software task", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 }
             ]
@@ -294,7 +384,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the editing task", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -302,7 +395,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the shooting task", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 }
             ]
@@ -316,7 +412,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the legal service needed", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -324,7 +423,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the accounting service needed", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 }
             ]
@@ -338,7 +440,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the tutoring needs", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 }
             ]
@@ -352,7 +457,10 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the electrical issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 },
                 {
@@ -360,13 +468,16 @@ const seedData = async () => {
                     "questions": [
                         { "id": "q1", "question": "Enter post title", "key": "title" },
                         { "id": "q2", "question": "Describe the mechanical issue", "key": "description" },
-                        { "id": "q3", "question": "What is the urgency level?", "key": "urgency" }
+                        { "id": "q3", "question": "What is your address?", "key": "location" },
+                        { "id": "q4", "question": "When do you need?", "key": "date" },
+                        { "id": "q6", "question": "Whats your budget?", "key": "price" },
+                        { "id": "q5", "question": "Addition details", "key": "complex", "additional": ["security", "description"] }
                     ]
                 }
             ]
         }
     ];
-    
+
 
     for (const categoryData of jsonData) {
         const categoriesCollection = database.get<Category>('category');
@@ -375,24 +486,29 @@ const seedData = async () => {
 
         await database.write(async () => {
             let categoryx = await categoriesCollection.create((category) => {
-              category.name = categoryData.name;
+                category.name = categoryData.name;
             })
-            console.log(categoryx.name)
             for (const subCategory of categoryData.subcategories) {
                 const sub = await subCategoriesCollection.create(subcategory => {
                     subcategory.category_id.set(categoryx)
                     subcategory.name = subCategory.name
-                  })
-                  console.log(sub.name)
-                  for (const question of subCategory.questions) {
+                })
+                for (const question of subCategory.questions) {
                     console.log(question.question)
-                    const que = await questions.create(questionX => {
-                        questionX.subcategory_id.set(sub)
-                        questionX.question = question.question
-                        questionX.controltype = getRandomControlType()
-                        questionX.key = question.key
-                      })
-                      
+                    try {
+                        const que = await questions.create(questionX => {
+                            questionX.subcategory_id.set(sub)
+                            questionX.question = question.question
+                            questionX.controltype = getRandomControlType()
+                            questionX.key = question.key
+                            questionX.data = ["security", "description"]
+                        })
+                    }
+                    catch (e) {
+                        console.log(e)
+                    }
+
+
                 }
             }
         });

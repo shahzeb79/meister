@@ -5,6 +5,7 @@ import { useNavigation, useRouter } from 'expo-router';
 import database from '../db';
 import User from '../model/userprofile';
 import { ThemedView } from '@/components/ThemedView';
+import GlobalBackground  from '@/components/GlobalBackground';
 
 const ProfilePage = () => {
   const navigation = useNavigation();
@@ -46,6 +47,7 @@ const ProfilePage = () => {
     );
   }
   return (
+    <GlobalBackground>
     <ThemedView style={styles.container}>
       {/* Profile Picture */}
       <ThemedView style={styles.header}>
@@ -70,9 +72,7 @@ const ProfilePage = () => {
       <Divider style={styles.divider} />
 
       <ThemedView style={styles.section}>
-        <ThemedView style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>About me</Text>
-        </ThemedView>
         <Text style={styles.memberSince}>{profile.aboutme}</Text>
       </ThemedView>
 
@@ -87,25 +87,26 @@ const ProfilePage = () => {
         <Text style={styles.userId}>Member since: 12542664</Text>
       </ThemedView>
     </ThemedView>
+    </GlobalBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  header: { flexDirection: 'row', alignItems: 'center', paddingTop: 10,borderBottomWidth:0.5,borderBottomColor: 'grey',justifyContent: 'space-between' },
+  header: { flexDirection: 'row',backgroundColor: 'transparent', alignItems: 'center', paddingTop: 10,borderBottomWidth:0.5,borderBottomColor: 'grey',justifyContent: 'space-between' },
   headerTitle: { fontSize: 20},
-  container: { flex: 1, paddingTop: 25 },
+  container: { flex: 1, paddingTop: 25,backgroundColor: 'transparent' },
   userName: { fontSize: 18, fontWeight: 'bold' },
   headerIcons: { flexDirection: 'row' },
-  profileSection: { alignItems: 'center', marginVertical: 15,paddingHorizontal: 15, },
+  profileSection: { alignItems: 'center', marginVertical: 15,paddingHorizontal: 15, backgroundColor: 'transparent'},
   avatar: { backgroundColor: '#EAEAEA' },
   picture: { width: 150, height: 150, borderRadius: 25, backgroundColor: '#EAEAEA' },
   taskCount: { fontSize: 20, fontWeight: 'bold', color: '#311D45', marginTop: 8 },
   taskText: { fontSize: 14, color: '#311D45' },
   insuranceButton: { borderColor: '#311D45', marginVertical: 10, width: "70%", alignSelf: 'center' },
   divider: { marginVertical: 10 },
-  section: { marginBottom: 5,paddingHorizontal: 20 },
+  section: { marginBottom: 5,paddingHorizontal: 20,backgroundColor: 'transparent' },
   sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  sectionTitle: { fontSize: 16, fontWeight: 'bold' },
+  sectionTitle: { fontSize: 16, fontWeight: 'bold', },
   memberSince: { fontSize: 16, color: 'gray' },
   verifiedRow: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' },
   userId: { fontSize: 14, color: 'gray' },

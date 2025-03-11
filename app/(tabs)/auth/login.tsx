@@ -12,6 +12,7 @@ import database from '../db';
 import { Q } from '@nozbe/watermelondb';
 import User from '../model/userprofile';
 import { ThemedView } from '@/components/ThemedView';
+import GlobalBackground  from '@/components/GlobalBackground';
 
 // import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 
@@ -223,6 +224,7 @@ export default function PhoneSignIn() {
     }
   if (!confirm) {
     return (
+      <GlobalBackground>
       <ThemedView style={styles.container}>
         <Entypo name="cross" color="grey" size={28} onPress={() => navigation.goBack()} style={styles.iconImage} />
         <Text style={styles.title}>Enter your phone number</Text>
@@ -263,10 +265,12 @@ export default function PhoneSignIn() {
         { beingConfirmed && <Text style={{alignSelf:"center", color: "grey", paddingTop: 100}}>Confirming...</Text>}
       </ThemedView>
       </ThemedView>
+      </GlobalBackground>
     );
   }
 
   return (
+    <GlobalBackground>
     <ThemedView style={styles.container}>
       <Entypo name="cross" color="grey" size={28} onPress={() => setConfirm(null)} style={styles.iconImage} />
       <Text style={styles.title}>Enter OTP</Text>
@@ -287,7 +291,7 @@ export default function PhoneSignIn() {
           style={styles.input}
         />
       </View>
-      <Text style={{ textAlign: 'center', marginVertical: 10, color: 'grey' }}>
+      <Text style={{ textAlign: 'center', marginVertical: 10 }}>
       {timer > 0 ? `Wait for ${timer} seconds to resend OTP` : 'Didn’t receive the OTP?'}
     </Text>
     
@@ -295,7 +299,7 @@ export default function PhoneSignIn() {
           <Text style={styles.buttonText}>Confirm Code</Text>
       </TouchableOpacity>
       <TouchableOpacity 
-      style={[styles.button, isResendDisabled && { backgroundColor: 'grey' }]}
+      style={[styles.button, isResendDisabled && { backgroundColor: "rgba(128, 128, 128, 0.7)" }]}
       onPress={resendOTP} 
       disabled={isResendDisabled}
     >
@@ -303,6 +307,7 @@ export default function PhoneSignIn() {
     </TouchableOpacity>
 
     </ThemedView>
+    </GlobalBackground>
   );
 }
 
@@ -314,7 +319,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: '50%',
     padding: 10,
-    borderWidth: 1,  // Purple border
+    borderWidth: 0.5,  // Purple border
     borderColor: '#463458',
     borderRadius: 10,
     marginBottom:15
@@ -322,7 +327,6 @@ const styles = StyleSheet.create({
   
   phoneNumberText: {
     fontSize: 16,
-    fontWeight: 'bold',
     color: 'black',
   },
   
@@ -333,10 +337,12 @@ const styles = StyleSheet.create({
   containerSocial: {
     flex: 1,
     paddingTop: 20,
+    backgroundColor:'transparent'
   },
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor:'transparent'
   },
   title: {
     fontSize: 24,
@@ -347,26 +353,23 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 14,
-    color: 'grey',
     textAlign: 'center',
     marginBottom: 20,
   },
   subtitlesocial: {
     fontSize: 14,
     paddingLeft:4,
-    color: 'grey',
     textAlign: 'left',
   },
   input: {
     paddingHorizontal: 10,
     paddingBottom:1,
     width: "100%",
-    color: '#888',
     fontSize: 16,
   },
 
   button: {
-    backgroundColor: "#463458",
+    backgroundColor: "rgba(70, 52, 88, 0.9)",
     height: 50,
     borderRadius: 30,
     justifyContent: 'center',
@@ -375,8 +378,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 16,
   },
   iconImage: {
     paddingTop: 15,

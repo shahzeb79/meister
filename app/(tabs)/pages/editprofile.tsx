@@ -10,6 +10,7 @@ import database from '../db';
 import User from '../model/userprofile';
 import * as ImagePicker from 'expo-image-picker';
 import { ThemedView } from '@/components/ThemedView';
+import GlobalBackground  from '@/components/GlobalBackground';
 
 const EditProfileScreen = () => {
   const navigation = useNavigation();
@@ -131,6 +132,7 @@ const EditProfileScreen = () => {
   };
   
   return (
+    <GlobalBackground>
     <ThemedView style={styles.container}>
       {/* Back Button */}
       <ThemedView style={styles.header}>
@@ -197,25 +199,7 @@ const EditProfileScreen = () => {
            {profile.dob}
           </Text>
         </TouchableOpacity>
-        {/* <Modal visible={isDatePickerVisible} transparent={false} >
-          <ThemedView style={styles.modalContainer}>
-            <ThemedView style={styles.pickerContainer}>
-              <DateTimePicker
-                mode="single"
-                date={selected}
-                maxDate={new Date()}
-                onChange={onDateChange}
-                styles={{
-                  ...defaultStyles,
-                  selected: { backgroundColor: '#463458' }, // Highlight the selected day
-                }}
-              />
-              <TouchableOpacity style={styles.doneButton} onPress={() => setDatePickerVisible(false)}>
-                <Text style={styles.doneText}>Done</Text>
-              </TouchableOpacity>
-            </ThemedView>
-          </ThemedView>
-        </Modal> */}
+    
 
         <Text style={styles.label}>Email</Text>
         <TextInput style={styles.input} value={profile.email} editable={false} />
@@ -223,7 +207,6 @@ const EditProfileScreen = () => {
         <Text style={styles.label}>Phone Number</Text>
         <TextInput keyboardType="phone-pad" onBlur={handleBlur} onFocus={() => handleFocus('phone')} style={[styles.input, focusedField === 'phone' && styles.inputFocused]} value={profile.phone} onChangeText={(text) => handleInputChange('phone', text)} />
 
-        <Divider style={styles.divider} />
 
         {/* Delete Profile Button */}
         <TouchableOpacity style={styles.deleteButton}>
@@ -231,16 +214,18 @@ const EditProfileScreen = () => {
         </TouchableOpacity>
       </ScrollView>
     </ThemedView>
+    </GlobalBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, paddingTop: 25 },
-  header: { flexDirection: 'row', alignItems: 'center', paddingTop: 10,borderBottomWidth:0.5,borderBottomColor: 'grey',justifyContent: 'center',position: 'relative'},
+  container: { flex: 1, paddingTop: 25,backgroundColor: 'transparent' },
+  header: { flexDirection: 'row', alignItems: 'center', paddingTop: 10,borderBottomWidth:0.5,borderBottomColor: 'grey',justifyContent: 'center',position: 'relative',backgroundColor: 'transparent'},
   headerTitle: { fontSize: 20,flex: 1, textAlign:'center',marginRight: 50 },
   headerSave: { fontSize: 18,color:'#463458',position: 'absolute',right: 18, top:25 },
-  picture: { width: 130, height: 130, borderRadius: 25, backgroundColor: '#EAEAEA' },
+  picture: { width: 130, height: 130, borderRadius: 25,backgroundColor: 'transparent' },
   imageContainer: {
+    backgroundColor: 'transparent'
   },
   deleteIcon: {
     position: 'absolute',
@@ -266,6 +251,7 @@ const styles = StyleSheet.create({
   profileSection: {
     alignItems: 'center',
     marginVertical: 15,
+    backgroundColor: 'transparent'
   },
   uploadButton: {
     marginTop: 10,
@@ -278,7 +264,6 @@ const styles = StyleSheet.create({
 
   label: {
     fontSize: 14,
-    color: 'gray',
     marginTop: 10,
   },
   input: {
@@ -298,9 +283,7 @@ const styles = StyleSheet.create({
   genderButton: {
     flex: 1,
     paddingVertical: 10,
-    borderColor: '#ddd',
     alignItems: 'center',
-    borderWidth:0.6,
   },
   selectedGender: {
     backgroundColor: '#463458',
@@ -308,7 +291,6 @@ const styles = StyleSheet.create({
   },
   genderText: {
     fontSize: 16,
-    color: '#666',
   },
   selectedGenderText: {
     fontSize: 16,
