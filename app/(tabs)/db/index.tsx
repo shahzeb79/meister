@@ -5,6 +5,7 @@ import User from '../model/userprofile'
 import Category from '../model/Category'
 import Subcategory from '../model/Subcategory'
 import Questions from '../model/Questions'
+import Posting from '../model/Posting'
 import schema from './schema'
 import migrations from './migrations'
 // import Post from './model/Post' // ⬅️ You'll import your Models here
@@ -32,7 +33,8 @@ const database = new Database({
     User,
     Category,
     Subcategory,
-    Questions
+    Questions,
+    Posting
   ],
 })
 export default database;

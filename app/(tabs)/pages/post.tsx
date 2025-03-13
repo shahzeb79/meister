@@ -20,7 +20,7 @@ const { width, height } = Dimensions.get("window"); // Get screen width and heig
 
 const PostCreation = () => {
   const router = useRouter();
-  const { id, subcategory } = useGlobalSearchParams();
+  const { id, subcategory, category } = useGlobalSearchParams();
   const [questions, setQuestions] = useState([]);
   const [formatedAddress, setFormatedAddress] = useState('');
   const [answers, setAnswers] = useState({});
@@ -111,7 +111,13 @@ const PostCreation = () => {
       }, 10);
     }  else {
        setAnswers((prev) => ({ ...prev, ['payment_method']: selectedPayment }))
-        console.log(answers)
+       setTimeout(() => {
+        router.push({
+          pathname: "/(tabs)/pages/confirmation",
+          params: { answers: JSON.stringify(answers) },
+        });
+      }, 100);
+   
     }
   };
   const loadData = async () => {
@@ -143,6 +149,7 @@ const PostCreation = () => {
       const subCategory = await subCategoriesCollection.find(id.toString()); // Find category by id
       const que = await subCategory.questions.fetch();
       setAnswers((prev) => ({ ...prev, ['subcategory']: subcategory }));
+      setAnswers((prev) => ({ ...prev, ['category']: category }));
       setQuestions(que);
     };
     if (id){

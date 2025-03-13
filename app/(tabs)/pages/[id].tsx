@@ -110,7 +110,7 @@ const SubCategory = () => {
             onPress={() => {
               router.push({
                 pathname: "/(tabs)/pages/post",
-                params: { subcategory: item.name, id: item.id },
+                params: { subcategory: item.name, id: item.id, category: name },
               });
             }}
           >

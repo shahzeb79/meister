@@ -17,7 +17,6 @@ const SettingsPage = () => {
       console.log("User signed out");
       await auth.signOut();
       GoogleSignin.signOut();
-      router.dismissAll();
       router.push('/auth/login');
     };
   return (

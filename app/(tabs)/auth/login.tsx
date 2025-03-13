@@ -13,6 +13,8 @@ import { Q } from '@nozbe/watermelondb';
 import User from '../model/userprofile';
 import { ThemedView } from '@/components/ThemedView';
 import GlobalBackground  from '@/components/GlobalBackground';
+import { MMKV } from 'react-native-mmkv'
+export const storage = new MMKV()
 
 // import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 
@@ -145,16 +147,20 @@ export default function PhoneSignIn() {
           ).fetchCount();
           if(userExist == 1){
             console.log('user exist', userExist)
+            console.log( storage.getAllKeys() )
             router.replace('/(tabs)/pages')
           } else {
             await database.write(async () => {
-                await postsCollection.create(user => {
+                let user = await postsCollection.create(user => {
                   user.firstName = signinObject.additionalUserInfo?.profile?.given_name || ''
                   user.lastName = signinObject.additionalUserInfo?.profile?.family_name || ''
                   user.email = signinObject.additionalUserInfo?.profile?.email || ''
                 })
+                storage.set('user.id', user.id)
+                storage.set('is-mmkv-fast-asf', true)
+                console.log('user added to db, didnt exist',user.id)
             })
-            console.log('user added to db exist')
+            
             router.replace('/(tabs)/pages')
           }
       }

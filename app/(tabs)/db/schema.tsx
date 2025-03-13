@@ -39,6 +39,17 @@ export default appSchema({
         { name: 'data', type: 'string' },
         { name: 'subcategory_id', type: 'string', isIndexed: true }
       ]
+    }),
+    tableSchema({
+      name: 'posting',
+      columns: [
+        { name: 'userid', type: 'string' },
+        { name: 'questions', type: 'string' },
+        { name: 'category', type: 'string' },
+        { name: 'subcategory', type: 'string' },
+        { name: 'created_at', type: 'number' },
+        { name: 'updated_at', type: 'number' },
+      ]
     })
   ]
 })
