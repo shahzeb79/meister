@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { TouchableOpacity, TextInput, Animated , StyleSheet, Dimensions } from "react-native";
+import { TouchableOpacity, TextInput , StyleSheet, Dimensions } from "react-native";
 import { useRouter, useGlobalSearchParams } from "expo-router";
 import { IconButton,Text,RadioButton  } from 'react-native-paper';
 import { FlashList } from "@shopify/flash-list";
@@ -93,7 +93,6 @@ const PostCreation = () => {
     setAnswers((prev) => ({ ...prev, [key]: value }));
   };
   const handleCustomBudgetChange = (value: string) => {
-    console.log(value)
     setCustomBudget(value);
     setAnswers((prev) => ({ ...prev, ['budget']: value }));
   };
@@ -110,18 +109,25 @@ const PostCreation = () => {
         }
       }, 10);
     }  else {
-       setAnswers((prev) => ({ ...prev, ['payment_method']: selectedPayment }))
-       setTimeout(() => {
         router.push({
           pathname: "/(tabs)/pages/confirmation",
           params: { answers: JSON.stringify(answers) },
-        });
-      }, 100);
+        })
    
     }
   };
   const loadData = async () => {
     let location = await Location.getLastKnownPositionAsync();
+    let currentLocation ={
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+    }
+    setLocationX(currentLocation);
+    setmarker([
+      {
+        coordinates:currentLocation
+      }
+    ])
       const geocode = await Location.reverseGeocodeAsync({
               latitude: location.coords.latitude,
               longitude: location.coords.longitude,
@@ -132,16 +138,7 @@ const PostCreation = () => {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
       } }));
-      let currentLocation ={
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      }
-      setLocationX(currentLocation);
-      setmarker([
-        {
-          coordinates:currentLocation
-        }
-      ])
+     
   }
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -193,9 +190,6 @@ const PostCreation = () => {
           cameraPosition={{
             coordinates:locationX,
             zoom: zoom
-          }}
-          properties={{
-            mapType:GoogleMaps.MapType.NORMAL
           }}
           markers={marker}
           uiSettings={{
@@ -272,7 +266,10 @@ const PostCreation = () => {
           </TouchableOpacity>
         ))}
         </ThemedView>
-        <RadioButton.Group onValueChange={setSelectedPayment} value={selectedPayment}>
+        <RadioButton.Group onValueChange={(value)=>{
+          setAnswers((prev) => ({ ...prev, ['payment_method']: value }))
+          setSelectedPayment(value)
+        }} value={selectedPayment}>
         <ThemedView style={styles.option}>
         <RadioButton value="secure_deal" color="#463458"/>
           <ThemedView style={styles.optionTextContainer}>

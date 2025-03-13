@@ -40,23 +40,8 @@ export default function HomeScreen() {
       try {
         // Query the database for all postings
         const postingsData = await postingCollection.query( Q.sortBy('created_at', Q.desc), // ✅ Correct way to sort
-        Q.take(3)).fetch();
-        
-        postingsData.forEach((post, index) => {
-          // Check if post.questions is a string before parsing
-          if (typeof post.questions === 'string') {
-            try {
-              postingsData[index].questionsParsed = JSON.parse(post.questions); // Only parse if it's a string
-            } catch (error) {
-              console.error('JSON parsing error for post', index, post.questions, error);
-              postingsData[index].questionsParsed = {};  // Handle the error by assigning a default value
-            }
-          } else {
-            // If it's already an object, just use it
-            postingsData[index].questionsParsed = post.questions;
-          }
-        });
-        console.log(postingsData[0].questionsParsed.title)
+        Q.take(5)).fetch();
+      
         setPostings(postingsData);
       } catch (error) {
         console.error("Error fetching postings:", error);
@@ -78,6 +63,7 @@ export default function HomeScreen() {
       overScrollMode='always'
       scrollEventThrottle={50}
       showsVerticalScrollIndicator={false}
+      removeClippedSubviews={true}
 >
       <ThemedView style={styles.title}>
         <ThemedText style={{fontSize: 20}}> What do you need done?</ThemedText>
@@ -92,11 +78,12 @@ export default function HomeScreen() {
 
           <ThemedView key={index} style={styles.cardFooter}>
             
-            <ThemedText style={{fontWeight: '600', marginBottom: 5}}>{posting.questionsParsed.title}</ThemedText>
+            <ThemedText style={{fontWeight: '600', marginBottom: 5}}>{posting.questions.title}</ThemedText>
             <ThemedView style={{flexDirection: 'row',marginBottom: 10}}>
-              <ThemedText style={{fontSize: 14, color: 'grey'}}>{posting.questionsParsed.budget}€ • </ThemedText>
+              <ThemedText style={{fontSize: 14, color: 'grey'}}>{posting.questions.budget}€ • </ThemedText>
               <ThemedText style={{fontSize: 14, color: 'grey'}}>Active • </ThemedText>
-              <ThemedText style={{fontSize: 14, color: 'grey'}}>{posting.questionsParsed.date}</ThemedText>
+              <ThemedText style={{fontSize: 14, color: 'grey'}}>{posting.questions.date} • </ThemedText>
+              <ThemedText style={{fontSize: 14, color: 'grey'}}>0 Notifications</ThemedText>
             </ThemedView>
             <TouchableOpacity style={styles.button}>
               <ThemedText style={styles.buttonText}>See Offer</ThemedText>

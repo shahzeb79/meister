@@ -44,6 +44,13 @@ const Confirmation = () => {
           }>
             <Text style={styles.buttonText}>Confirm</Text>
           </TouchableOpacity>
+          <TouchableOpacity  onPress={()=> {
+
+           router.back();
+          }
+          }>
+            <Text style={styles.buttonText}>Go Back</Text>
+          </TouchableOpacity>
       </ThemedView>
      </GlobalBackground>
   );

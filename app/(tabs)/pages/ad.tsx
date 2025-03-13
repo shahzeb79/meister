@@ -49,13 +49,9 @@ const AdDetailsScreen = () => {
   const [paymentMethod, setPaymentMethod] = useState(ad.payment_method);
   delete ad.budget
   delete ad.coordinates
-  delete ad.coordinates
   delete ad.address
- console.log(ad)
   useEffect(() => {
-    
-
-   
+  
   }, []);
   
   const FirstRoute = () => (
@@ -102,15 +98,16 @@ const AdDetailsScreen = () => {
                 <Divider style={{ backgroundColor: 'rgba(212, 207, 207, 0.54)', height: 30 }} />
               </View>
                {Object.entries(ad).map(([key, value], index) => (
-                <ThemedView style={{flexDirection: 'column', marginHorizontal:0}}>
+                <ThemedView key={index} style={{flexDirection: 'column', marginHorizontal:0}}>
                   <Text 
-                    key={index} 
+  
                     style={{paddingBottom:3, paddingTop: 10,color: 'grey', fontSize: 14,marginHorizontal:13}}
                   >
                     {key}
                   </Text>
-                  <Text style={{paddingBottom:10, paddingTop: 0,marginHorizontal:13, borderBottomWidth:0.2, borderBottomColor: 'grey'}}>{value}</Text>
-                     <Divider style={{ backgroundColor: 'rgba(212, 207, 207, 0.54)', height: 8 }} />
+                  <Text                     
+                    style={{paddingBottom:10, paddingTop: 0,marginHorizontal:13, borderBottomWidth:0.2, borderBottomColor: 'grey'}}>{value}</Text>
+                     <Divider  style={{ backgroundColor: 'rgba(212, 207, 207, 0.54)', height: 8 }} />
                   </ThemedView>
                 ))}
 
@@ -126,7 +123,7 @@ const AdDetailsScreen = () => {
         <ThemedView style={styles.container}>
             <ThemedView style={styles.header}>
                 <IconButton iconColor='#463458' icon="arrow-left" size={26} onPress={() => {
-                  router.push('/pages')
+                  router.dismiss(5)
                   }} />
                 <Text style={styles.headerTitle}>Ad No 13557</Text>
             </ThemedView>
