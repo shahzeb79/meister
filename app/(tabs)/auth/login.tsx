@@ -52,6 +52,10 @@ export default function PhoneSignIn() {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
       });
+      const address = geocode[0].formattedAddress || ''
+      storage.set('user.latitude', location.coords.latitude)
+      storage.set('user.longitude', location.coords.longitude)
+      storage.set('user.address', address)
       let cciso,ccc;
       if (geocode.length > 0) {
         const userCountry = geocode[0].isoCountryCode;

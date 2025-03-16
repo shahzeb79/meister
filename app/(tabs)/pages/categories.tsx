@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useCallback, useMemo } from "react";
+import React, { useEffect, useState,useCallback, useMemo, memo } from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { ThemedView } from '@/components/ThemedView';
@@ -66,51 +66,44 @@ const ItemList = () => {
       fetchCategories();
       colorAnimation.value = withRepeat(withTiming(1, { duration: 100 }), -1, true);
     }, []);
-    const handleNavigation = useCallback(
-      (id: string, name: string) => {
-        router.push(`/(tabs)/pages/${id}?name=${name}`);
-      },
-      [router]
-    );
-  return (
-   <GlobalBackground>
-    <ThemedView style={styles.container}>
-      <ThemedView style={styles.header}>
-        <IconButton iconColor='#463458' icon="arrow-left" size={26} onPress={() => router.back()} />
-        <Text style={styles.headerTitle}>Category</Text>
-      </ThemedView>
-      <FlashList
-        data={items}
-        estimatedItemSize={12}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => loading ? (
-          <AnimatedTouchableOpacity style={[styles.touchable]}>
-            <Animated.View
-              style={[{
-                width: 30,
-                height: 30,
-                borderRadius: 9, // Makes it circular
-                alignItems: "center",
-                marginRight: 13,
-                justifyContent: "center",
-              }, animatedStyle]}
-            >
-            </Animated.View>
-            <Animated.View
-              style={[{
-                width: 300,
-                height: 30,
-                borderRadius: 7, // Makes it circular
-                backgroundColor: "lightgrey", // Dynamic background color
-                alignItems: "center",
-                marginRight: 13,
-                justifyContent: "center",
-              }, animatedStyle]}
-            >
-            </Animated.View>
+    const MyAnimationComponent = () => {
+      return (
+        <AnimatedTouchableOpacity style={[styles.touchable]}>
+        <Animated.View
+          style={[{
+            width: 30,
+            height: 30,
+            borderRadius: 9, // Makes it circular
+            alignItems: "center",
+            marginRight: 13,
+            justifyContent: "center",
+          }, animatedStyle]}
+        >
+        </Animated.View>
+        <Animated.View
+          style={[{
+            width: 300,
+            height: 30,
+            borderRadius: 7, // Makes it circular
+            backgroundColor: "lightgrey", // Dynamic background color
+            alignItems: "center",
+            marginRight: 13,
+            justifyContent: "center",
+          }, animatedStyle]}
+        >
+        </Animated.View>
 
-          </AnimatedTouchableOpacity>
-        ) : (
+      </AnimatedTouchableOpacity>
+      );
+    };
+    const renderItem = ({ item }: any) => {
+      const MemoizedAnimationComonent = memo(MyAnimationComponent);
+      if (loading) {
+        return (
+          <MemoizedAnimationComonent/>
+        );
+      } else {
+        return(
           <TouchableOpacity
             style={{
               flexDirection: "row",
@@ -139,7 +132,22 @@ const ItemList = () => {
             <Text style={{ fontSize: 16, flex: 1 }}>{item.name}</Text>
             <IconButton icon="chevron-right" size={20} iconColor="grey" />
           </TouchableOpacity>
-        )}
+        );
+      }
+    };
+  return (
+   <GlobalBackground>
+    <ThemedView style={styles.container}>
+      <ThemedView style={styles.header}>
+        <IconButton iconColor='#463458' icon="arrow-left" size={26} onPress={() => router.back()} />
+        <Text style={styles.headerTitle}>Category</Text>
+      </ThemedView>
+      <FlashList
+        data={items}
+        estimatedItemSize={12}
+        keyExtractor={(item) => item.id}
+        showsHorizontalScrollIndicator={false}
+        renderItem={renderItem}
       />
     </ThemedView>
     </GlobalBackground>

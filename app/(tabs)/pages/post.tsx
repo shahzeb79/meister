@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback, memo } from "react";
 import { TouchableOpacity, TextInput , StyleSheet, Dimensions } from "react-native";
 import { useRouter, useGlobalSearchParams } from "expo-router";
 import { IconButton,Text,RadioButton  } from 'react-native-paper';
@@ -14,9 +14,8 @@ import GlobalBackground  from '@/components/GlobalBackground';
 import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
 import dayjs from 'dayjs';
 import { range } from "rxjs";
+import {storage} from '../auth/login'
 const { width, height } = Dimensions.get("window"); // Get screen width and height
-
-
 
 const PostCreation = () => {
   const router = useRouter();
@@ -32,13 +31,15 @@ const PostCreation = () => {
   const [selectedPayment, setSelectedPayment] = useState("secure_deal");
   const [selectedBudget, setSelectedBudget] = useState("");
   const [customBudget, setCustomBudget] = useState("");
+  const startTimeRef = useRef<number | null>(null);
+  const [loadTime, setLoadTime] = useState<number | null>(null);
 
   const [marker, setmarker] = useState([{
-    coordinates: locationX
   }]);
   const subCategoriesCollection = database.get<SubCategory>('subcategory');
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const mapView = useRef(null);
+
   const onAddSticker = () => {
     setIsModalVisible(true);
   };
@@ -85,7 +86,13 @@ const PostCreation = () => {
       longitude: data.lng,
     });
     setFormatedAddress(geocode[0].formattedAddress)
+    setAnswers((prev) => ({ ...prev, ['address']: geocode[0].formattedAddress }));
+    setAnswers((prev) => ({ ...prev, ['coordinates']: {
+      latitude: data.lat,
+      longitude: data.lng,
+    } }));
     setIsModalVisible(false);
+
 
   };
 
@@ -117,10 +124,12 @@ const PostCreation = () => {
     }
   };
   const loadData = async () => {
-    let location = await Location.getLastKnownPositionAsync();
+    const latitude = Number(storage.getNumber('user.latitude'))
+    const longitude = storage.getNumber('user.longitude')
+    const userAddress = storage.getString('user.address') || ''
     let currentLocation ={
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
+      latitude: latitude,
+      longitude: longitude,
     }
     setLocationX(currentLocation);
     setmarker([
@@ -128,36 +137,45 @@ const PostCreation = () => {
         coordinates:currentLocation
       }
     ])
-      const geocode = await Location.reverseGeocodeAsync({
-              latitude: location.coords.latitude,
-              longitude: location.coords.longitude,
-      });
-      setFormatedAddress(geocode[0].formattedAddress)
-      setAnswers((prev) => ({ ...prev, ['address']: geocode[0].formattedAddress }));
-      setAnswers((prev) => ({ ...prev, ['coordinates']: {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      } }));
-     
+    
+    setFormatedAddress(userAddress)
+    setAnswers((prev) => ({ ...prev, ['address']: userAddress }));
+    setAnswers((prev) => ({ ...prev, ['coordinates']: currentLocation }));
   }
   useEffect(() => {
     const fetchQuestions = async () => {
-      
       const subCategory = await subCategoriesCollection.find(id.toString()); // Find category by id
       const que = await subCategory.questions.fetch();
       setAnswers((prev) => ({ ...prev, ['subcategory']: subcategory }));
       setAnswers((prev) => ({ ...prev, ['category']: category }));
       setQuestions(que);
+      await loadData();
+
     };
     if (id){
         fetchQuestions();
-        loadData();
     }
   }, [id]);
 
- 
-  const renderItem = ({ item }: any) => (
-    <ThemedView style={styles.card}>
+
+  const MyDateComponent = () => {
+    return (
+      <TouchableOpacity
+        style={styles.dateinput}
+        onPress={showDatepicker}
+      > 
+      <IconButton iconColor='rgb(28, 152, 82)' icon="calendar-range" size={28} style={{ top: -2, left: -10 }}></IconButton>
+        <Text style={styles.dateText}>
+          {date}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderItem = ({ item }: any) => {
+    const MemoizedDateComonent = memo(MyDateComponent);
+    return(
+      <ThemedView style={styles.card}>
       <Text style={styles.label}>{item.question}</Text>
       {item.key == "title" &&
       <TextInput
@@ -177,49 +195,41 @@ const PostCreation = () => {
       }
       {item.key == "location" && 
       <ThemedView style={{ backgroundColor: 'transparent',height: height*0.9}}>
-        <ThemedView style={{flexDirection: 'row',  alignSelf: 'flex-start', width: width, backgroundColor: 'transparent' }}>
-          <IconButton iconColor='rgb(28, 152, 82)' icon="map-marker" size={34} style={{ top: -9, left: -6 }}></IconButton>
-          <ThemedText style={styles.locationbox} onPress={onAddSticker}> {formatedAddress}</ThemedText>
-        </ThemedView>
-      
+      <ThemedView style={{flexDirection: 'row',  alignSelf: 'flex-start', width: width, backgroundColor: 'transparent' }}>
+        <IconButton iconColor='rgb(28, 152, 82)' icon="map-marker" size={34} style={{ top: -9, left: -6 }}></IconButton>
+        <ThemedText style={styles.locationbox} onPress={onAddSticker}> {formatedAddress}</ThemedText>
+      </ThemedView>
+    
       <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
       </EmojiPicker>
-    
-        <GoogleMaps.View 
-          ref={mapView}
-          cameraPosition={{
-            coordinates:locationX,
-            zoom: zoom
-          }}
-          markers={marker}
-          uiSettings={{
-            zoomControlsEnabled:true,
-            mapToolbarEnabled:true,
-            scaleBarEnabled:true,
-            compassEnabled:true,
-          }}
-          style={{ marginTop: 10, width: width, height: height*0.5,shadowOffset: {
-            width: 10,
-            height: 10,
-          },
-          shadowOpacity: 0.5,
-          shadowRadius: 5,
-          elevation: 7,
-          borderRadius: 1 }} 
-        />
+  
+      <GoogleMaps.View 
+        ref={mapView}
+        cameraPosition={{
+          coordinates:locationX,
+          zoom: zoom
+        }}
+        markers={marker}
+        uiSettings={{
+          zoomControlsEnabled:true,
+          mapToolbarEnabled:true,
+          scaleBarEnabled:true,
+          compassEnabled:true,
+        }}
+        style={{ marginTop: 10, width: width, height: height*0.5,shadowOffset: {
+          width: 10,
+          height: 10,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        elevation: 7,
+        borderRadius: 1 }} 
+      />
 
       </ThemedView>
       }
       {item.key == "date" &&
-      <TouchableOpacity
-        style={styles.dateinput}
-        onPress={showDatepicker}
-      > 
-      <IconButton iconColor='rgb(28, 152, 82)' icon="calendar-range" size={28} style={{ top: -2, left: -10 }}></IconButton>
-        <Text style={styles.dateText}>
-          {date}
-        </Text>
-      </TouchableOpacity>
+        <MemoizedDateComonent />
       }
       {item.key == "complex" &&
         <>
@@ -302,12 +312,14 @@ const PostCreation = () => {
           </ThemedView>
           
         </ThemedView>
-      </RadioButton.Group>
+       </RadioButton.Group>
         </>
       }
       
     </ThemedView>
-    );
+    )
+    
+  };
   return (
     <GlobalBackground>
         <ThemedView style={styles.container}>
@@ -334,11 +346,11 @@ const PostCreation = () => {
             ref={flashListRef}
             horizontal
             extraData={[isModalVisible, locationX]}
-            estimatedItemSize={3}
+            estimatedItemSize={width}
             estimatedListSize={{ height: height/1.19, width: width }}
             data={questions}
             scrollEnabled={false}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             showsHorizontalScrollIndicator={false}
             renderItem={renderItem}
           />
@@ -398,8 +410,8 @@ const styles = StyleSheet.create({
   },
   budgetInput: {
     width: width-20,
-    height: 70,
-    fontSize: 30,
+    height: 60,
+    fontSize: 23,
     marginBottom: 8,
     borderBottomColor: '#ccc',
     borderRadius: 10,

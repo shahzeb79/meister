@@ -161,16 +161,15 @@ const EditProfileScreen = () => {
           )}
         </ThemedView>
 
-        {/* Editable Fields */}
         <Text style={styles.label}>First Name</Text>
         <TextInput onBlur={handleBlur} onFocus={() => handleFocus('firstName')} style={[styles.input, focusedField === 'firstName' && styles.inputFocused]} value={profile.firstName} onChangeText={(text) => handleInputChange('firstName', text)} />
+        
+        <Text style={styles.label}>Last Name</Text>
+        <TextInput onBlur={handleBlur} onFocus={() => handleFocus('lastName')} style={[styles.input, focusedField === 'lastName' && styles.inputFocused]}  value={profile.lastName} onChangeText={(text) => handleInputChange('lastName', text)} />
+
         <Text style={styles.label}>About Me</Text>
         <TextInput multiline onBlur={handleBlur} onFocus={() => handleFocus('aboutme')} style={[styles.input, focusedField === 'aboutme' && styles.inputFocused]} value={profile.aboutme} onChangeText={(text) => handleInputChange('aboutme', text)} />
 
-        <Text style={styles.label}>Last Name</Text>
-        <TextInput onBlur={handleBlur} onFocus={() => handleFocus('lastName')} style={[styles.input, focusedField === 'lastName' && styles.inputFocused]}  value={profile.lastName} onChangeText={(text) => handleInputChange('lastName', text)} />
-      
-        {/* Gender Selection */}
         <ThemedView style={styles.genderContainer}>
           <TouchableOpacity
             style={[styles.genderButton, profile.gender === 'male' && styles.selectedGender]}
@@ -192,7 +191,7 @@ const EditProfileScreen = () => {
 
         <Text style={styles.label}>Date of Birth</Text>
         <TouchableOpacity
-          style={styles.dateInput}
+          style={styles.input}
           onPress={showDatepicker}
         >
           <Text style={styles.dateText}>
@@ -221,27 +220,20 @@ const EditProfileScreen = () => {
 const styles = StyleSheet.create({
   container: { flex: 1, paddingTop: 25,backgroundColor: 'transparent' },
   header: { flexDirection: 'row', alignItems: 'center', paddingTop: 10,borderBottomWidth:0.5,borderBottomColor: 'grey',justifyContent: 'center',position: 'relative',backgroundColor: 'transparent'},
-  headerTitle: { fontSize: 20,flex: 1, textAlign:'center',marginRight: 50 },
+  headerTitle: { fontSize: 20,flex: 1, textAlign:'center',marginRight: 50, color: '#311D45' },
   headerSave: { fontSize: 18,color:'#463458',position: 'absolute',right: 18, top:25 },
-  picture: { width: 130, height: 130, borderRadius: 25,backgroundColor: 'transparent' },
+  picture: { width: 130, height: 130, borderRadius: 25,backgroundColor: 'transparent', },
   imageContainer: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   deleteIcon: {
     position: 'absolute',
     top: -5,
     right: -5,
   },
-  dateInput: {
-    width: '92%',
-    alignSelf: 'center',
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
   dateText: {
     fontSize: 16,
-    color: 'black',
+    color: '#311D45',
   },
   scrollContainer: {
     flexGrow: 1,
@@ -251,7 +243,7 @@ const styles = StyleSheet.create({
   profileSection: {
     alignItems: 'center',
     marginVertical: 15,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   uploadButton: {
     marginTop: 10,
@@ -273,12 +265,17 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
     fontSize: 16,
     paddingVertical: 5,
-    color: 'black',
+    color: '#311D45',
   },
   genderContainer: {
     flexDirection: 'row',
     marginTop: 10,
     justifyContent: 'space-between',
+    shadowColor: '#000',
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 5, height: 5 },
+    shadowRadius: 10,
+    elevation: 7,
   },
   genderButton: {
     flex: 1,

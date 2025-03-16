@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from 'react';
-import { TouchableOpacity, TextInput, StyleSheet, ScrollView } from 'react-native';
+import { TouchableOpacity, TextInput, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { useRouter } from 'expo-router';
 import { IconButton } from 'react-native-paper';
 import { ThemedView } from '@/components/ThemedView';
@@ -7,41 +7,30 @@ import { ThemedText } from '@/components/ThemedText';
 import GlobalBackground  from '@/components/GlobalBackground';
 
 import database from '../db';
-// import Categories from '../model/Category';
 import seedData from '../db/seedData';
 import Posting from '../model/Posting';
 import { Q } from '@nozbe/watermelondb';
 
+const { width, height } = Dimensions.get("window"); // Get screen width and height
 
 export default function HomeScreen() {
   const router = useRouter();
-  const [postings, setPostings] = useState([]);  
+  const [postings, setPostings] = useState<Array<Posting>>([]);  
   const postingCollection = database.get<Posting>('posting');
   useEffect(() => {
     const fetchCategories = async () => {
-      // await database.write(async () => {
-      //   await database.unsafeResetDatabase();
-      // });
+      await database.write(async () => {
+        await database.unsafeResetDatabase();
+      });
       
-      // seedData();
-      // console.log("calling Seeddata")
-      // const data = await categoriesCollection.query().fetch();
-      // data.map(async (category) => {
-      //   const subcategories = await category.subcategory.fetch(); // Fetch related subcategories
-      //   console.log({
-      //     id: category.id,
-      //     name: category.name,
-      //     subcategories: subcategories.map((sub: any) => sub.name),
-      //   })
-      // })
+      seedData();
+  
     };
-    fetchCategories();
+    //fetchCategories();
     const fetchPostings = async () => {
       try {
         // Query the database for all postings
-        const postingsData = await postingCollection.query( Q.sortBy('created_at', Q.desc), // ✅ Correct way to sort
-        Q.take(5)).fetch();
-      
+        const postingsData = await postingCollection.query( Q.sortBy('created_at', Q.desc), Q.take(3)).fetch();
         setPostings(postingsData);
       } catch (error) {
         console.error("Error fetching postings:", error);
@@ -49,7 +38,7 @@ export default function HomeScreen() {
     };
     fetchPostings();
 
-  }, []);
+  }, [postings]);
   return (
     <GlobalBackground>
     <ThemedView style={styles.container} >
@@ -58,15 +47,8 @@ export default function HomeScreen() {
         <IconButton iconColor='#463458' icon="account-circle" size={30} onPress={() => router.push('/(tabs)/pages/profilepage')} />
         <IconButton iconColor='#463458' icon="cog" size={28} onPress={() => router.push('/(tabs)/pages/settings')} />
       </ThemedView>
-      <ScrollView
-      bounces={true}
-      overScrollMode='always'
-      scrollEventThrottle={50}
-      showsVerticalScrollIndicator={false}
-      removeClippedSubviews={true}
->
       <ThemedView style={styles.title}>
-        <ThemedText style={{fontSize: 20}}> What do you need done?</ThemedText>
+        <ThemedText style={{fontSize: 20}}> What needs to be done?</ThemedText>
         <TextInput style={styles.searchBar} placeholder="Specialist or service" />
         <TouchableOpacity style={styles.card} onPress={() => router.push('/(tabs)/pages/categories')}>
         <ThemedText style={styles.categoryTitle}>View Categories  </ThemedText>
@@ -90,7 +72,12 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </ThemedView>
       ))}
-      </ScrollView>
+       
+        <TouchableOpacity style={{ position: 'absolute', bottom: 25, borderTopWidth: 0.3, width: width}} onPress={() => {
+          router.push('/(tabs)/pages/offers')
+        }}>
+        <ThemedText style={{ marginTop: 15, marginLeft: 15, color: 'rgb(28, 152, 82)', fontWeight: '400'}}>View Offers in The Area </ThemedText>
+        </TouchableOpacity>
     </ThemedView>
     </GlobalBackground>
   );
@@ -109,7 +96,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 15,
     marginBottom: 15,
-    shadowColor: '#000',
+    shadowColor: '#fff',
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 3 },
     shadowRadius: 5,
@@ -148,7 +135,8 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     marginVertical: 20,
-    paddingHorizontal:10
+    paddingHorizontal:10,
+    
   },
   category: {
     marginBottom: 20,
@@ -160,7 +148,7 @@ const styles = StyleSheet.create({
   },
   card: {
     flexDirection: 'row',
-    width: 160,
+    width: 200,
     height: 40,
   },
   cardImage: {

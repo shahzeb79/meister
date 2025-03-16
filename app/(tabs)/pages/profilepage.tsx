@@ -61,11 +61,10 @@ const ProfilePage = () => {
         ) : (
           <Avatar.Icon size={120} icon="account" color="#A9A9A9" style={styles.avatar} />
         )}
-        <Text style={styles.taskCount}>1</Text>
-        <Text style={styles.taskText}>{profile.firstName}</Text>
+        <Text style={styles.taskText}>{profile.firstName}, {profile.lastName}</Text>
       </ThemedView>
 
-      <Button mode="outlined" icon="shield-check" contentStyle={{ flexDirection: 'row-reverse', paddingHorizontal: 15 }} style={styles.insuranceButton}>
+      <Button mode="outlined" icon="shield-check" textColor='#311D45' contentStyle={{ flexDirection: 'row-reverse', paddingHorizontal: 15, }} style={styles.insuranceButton}>
         Verified
       </Button>
       
@@ -81,8 +80,8 @@ const ProfilePage = () => {
       <ThemedView style={styles.section}>
         <Text style={styles.sectionTitle}>Contact</Text>
         <View style={styles.verifiedRow}>
-          <IconButton icon="cellphone" size={19} style={{ position: 'relative', left:-15}} />
-          <Text style={{position: 'absolute',left:20, color: 'grey'}}>{profile.phone}</Text>
+          <IconButton iconColor= '#311D45' icon="cellphone" size={19} style={{ position: 'relative', left:-15}} />
+          <Text style={{position: 'absolute',left:20, color: '#311D45'}}>{profile.phone}</Text>
         </View>
         <Text style={styles.userId}>Member since: 12542664</Text>
       </ThemedView>
@@ -93,23 +92,22 @@ const ProfilePage = () => {
 
 const styles = StyleSheet.create({
   header: { flexDirection: 'row',backgroundColor: 'transparent', alignItems: 'center', paddingTop: 10,borderBottomWidth:0.5,borderBottomColor: 'grey',justifyContent: 'space-between' },
-  headerTitle: { fontSize: 20},
+  headerTitle: { fontSize: 20, color: '#311D45'},
   container: { flex: 1, paddingTop: 25,backgroundColor: 'transparent' },
   userName: { fontSize: 18, fontWeight: 'bold' },
   headerIcons: { flexDirection: 'row' },
   profileSection: { alignItems: 'center', marginVertical: 15,paddingHorizontal: 15, backgroundColor: 'transparent'},
   avatar: { backgroundColor: '#EAEAEA' },
   picture: { width: 150, height: 150, borderRadius: 25, backgroundColor: '#EAEAEA' },
-  taskCount: { fontSize: 20, fontWeight: 'bold', color: '#311D45', marginTop: 8 },
-  taskText: { fontSize: 14, color: '#311D45' },
-  insuranceButton: { borderColor: '#311D45', marginVertical: 10, width: "70%", alignSelf: 'center' },
+  taskText: { fontSize: 20, color: '#311D45', marginTop: 18, fontWeight: '600' },
+  insuranceButton: { borderColor: '#311D45', marginVertical: 10, width: "70%", alignSelf: 'center',},
   divider: { marginVertical: 10 },
   section: { marginBottom: 5,paddingHorizontal: 20,backgroundColor: 'transparent' },
   sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   sectionTitle: { fontSize: 16, fontWeight: 'bold', },
-  memberSince: { fontSize: 16, color: 'gray' },
+  memberSince: { fontSize: 16, color: '#311D45' },
   verifiedRow: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' },
-  userId: { fontSize: 14, color: 'gray' },
+  userId: { fontSize: 14, color: '#311D45' },
 });
 
 export default ProfilePage;
