@@ -11,7 +11,7 @@ export default function Layout() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack screenOptions={{ headerShown: false, animation: 'none'}}>
       <Stack.Screen name="index" />
-    </Stack>
+      </Stack>
     </ThemeProvider>
   );
 }

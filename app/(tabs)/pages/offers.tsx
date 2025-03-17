@@ -1,6 +1,6 @@
 import React, {memo, useCallback, useEffect,useMemo,useRef,useState} from 'react';
-import { TouchableOpacity, TextInput, StyleSheet, Text,ActivityIndicator, View, Dimensions, ScrollView, Image } from 'react-native';
-import { useRouter } from 'expo-router';
+import { TouchableOpacity, TextInput, StyleSheet, Text,ActivityIndicator, View, Dimensions, ScrollView, Image, Switch } from 'react-native';
+import { Stack, useRouter } from 'expo-router';
 import { FlashList } from "@shopify/flash-list";
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { IconButton } from 'react-native-paper';
@@ -16,29 +16,24 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, {useSharedValue, withTiming} from 'react-native-reanimated';
 
 //import { createRandomPosts } from './randompost'
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetBackdrop, BottomSheetView  } from '@gorhom/bottom-sheet';
 
 export default function OffersScreen() {
   const router = useRouter();
-  const [renderStartTime, setRenderStartTime] = useState<number | null>(null);
   const [postings, setPostings] = useState<Array<Posting>>([]);  
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredPostings, setFilteredPostings] = useState<Array<Posting>>([]);
   const [isMapView, setIsMapView] = useState(false);
   const [locationX, setLocationX] = useState({});
-  const [zoom, setZoom] = useState(10);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [markers, setMarkers] = useState([{
   }]);
-  const [markerX, setmarkerX] = useState({});
   const postingCollection = database.get<Posting>('posting');
   const bottomSheetRef = useRef<BottomSheet>(null);
   const scaleX = useSharedValue(1);
   const scaleY = useSharedValue(1);
-  // Bottom sheet snap points
   const snapPoints = useMemo(() => ['90%'], []);
-
-  // Function to open the bottom sheet
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
 
   const loadMapData = async (data: Posting[]) => {
@@ -89,7 +84,6 @@ export default function OffersScreen() {
     }
   };
   useEffect(() => {
-    setRenderStartTime(Date.now());
     fetchPostings();
   }, []);
   const handleSearch = (text: string) => {
@@ -126,15 +120,30 @@ export default function OffersScreen() {
     scaleX.value = withTiming(0.9, { duration: 300 });
     scaleY.value = withTiming(0.95, { duration: 300 });
     bottomSheetRef.current?.expand();
+    setIsBottomSheetOpen(true);
   }, []);
   const handleClosePress = () => {
-    scaleX.value = withTiming(1);
-    scaleY.value = withTiming(1);
+    scaleX.value = withTiming(1,{ duration: 300 });
+    scaleY.value = withTiming(1,{ duration: 300 });
     bottomSheetRef.current?.close()
+    setIsBottomSheetOpen(false);
   }
-    
-
-
+  const HandleComponent = () => (
+    <View style={{ padding: 15, flexDirection: 'row', alignItems: 'center',borderBottomWidth:0.5,borderBottomColor: 'grey'}}>
+    <IconButton iconColor='#000' icon="close" size={24} style={{ margin: -5, padding:0}} onPress={handleClosePress}/>
+    <Text style={{ fontSize: 20, alignSelf: 'center',flex: 1, textAlign:'center', marginRight: 45  }}>Filters</Text>
+  </View>
+  );
+  const renderBackdrop = useCallback(
+    (props) => (
+      <BottomSheetBackdrop
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+      />
+    ),
+    []
+  )
   if (loading) {
         return (
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -145,10 +154,9 @@ export default function OffersScreen() {
       }
   if(!isMapView){
       return (
-          <GlobalBackground>
-            <GestureHandlerRootView  >
+            <GestureHandlerRootView>
               <Animated.View style={[styles.container,{
-                transform: [{scaleX}, {scaleY}]   // added shared values in animated view style
+                transform: [{scaleX}, {scaleY}]
               }]}>
                   <ThemedView style={styles.header}>
                       <IconButton iconColor='#463458' icon="arrow-left" size={26} onPress={() => router.back()} />
@@ -173,27 +181,50 @@ export default function OffersScreen() {
                     index={-1}
                     snapPoints={snapPoints}
                     detached={true}
-                    enableHandlePanningGesture={false}
+                    handleComponent={HandleComponent}
+                    backdropComponent={renderBackdrop}
+                    keyboardBehavior='extend'
                     enableContentPanningGesture={false}
-                    handleComponent={null}
-                
-                    backgroundStyle={{
-                      borderRadius: 20,  // Round top-left corner
+                    style={{
                     }}
-
+                    backgroundStyle={{
+                      backgroundColor: 'rgb(231, 228, 228)', 
+                    }
+                    }
                   >
-                  <BottomSheetView style={styles.contentContainer}>
-                  <View style={styles.sheetContent}>
-                    <Text style={styles.sheetTitle}>Фильтры</Text>
-                    <Text>Категории: Все категории</Text>
-                    <Text>Местоположение: Москва</Text>
-                    <IconButton iconColor='#000' icon="map-outline" size={22} style={{ margin: -5, padding:0}} onPress={handleClosePress}/>
-                    {/* Add other filter options here */}
+                  <BottomSheetView>
+                  <TouchableOpacity style={styles.sheetCards}>
+                    <ThemedText style={{ fontWeight: "600", marginBottom: 10 }}>
+                      Categories Select
+                    </ThemedText>
+                    
+                  </TouchableOpacity>
+                  <View style={styles.sheetCards}>
+                    <TextInput style={{marginTop: 15, alignSelf: 'center'}} placeholder="Minimum Budget"/>
+                  </View>
+                  
+
+                  <View style={styles.sheetCards}>
+                    <ThemedText style={{ fontWeight: "600", marginBottom: 10 }}>
+                      Payment By Card Only
+                    </ThemedText>
+                    <Switch
+                      trackColor={{ false: '#767577', true: '#81b0ff' }}
+                      ios_backgroundColor="#3e3e3e"
+                    />
+                  </View>
+                  <View style={styles.sheetCards}>
+                    <ThemedText style={{ fontWeight: "600", marginBottom: 10 }}>
+                      Verified Users Only
+                    </ThemedText>
+                    <Switch
+                      trackColor={{ false: '#767577', true: '#81b0ff' }}
+                      ios_backgroundColor="#3e3e3e"
+                    />
                   </View>
                   </BottomSheetView>
                 </BottomSheet>
             </GestureHandlerRootView>
-          </GlobalBackground>
       );
 }
 return (
@@ -241,6 +272,9 @@ const styles = StyleSheet.create({
   container: { flex: 1, paddingTop: 25,backgroundColor: 'transparent' },
   header: { flexDirection: 'row',backgroundColor: 'transparent', alignItems: 'center', paddingTop: 10,borderBottomWidth:0.5,borderBottomColor: 'grey',justifyContent: 'space-between' },
   headerTitle: { fontSize: 20, color: '#311D45'},
+  flashListBehind: {
+    zIndex: 0, // Send FlashList behind the BottomSheet
+  },
   sheetContent: {
     padding: 20,
   },
@@ -249,30 +283,48 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
+  backdrop: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent backdrop
+  },
   filterButton: {
     position: 'absolute',
     flexDirection: 'row',
     alignItems: 'center',
     bottom: 30, // Adjust based on your UI
     left: '50%',
-    transform: [{ translateX: -57 }], // Center horizontally
+    transform: [{ translateX: -58 }], // Center horizontally
     backgroundColor: 'rgba(70, 52, 95, 1)',
-    paddingVertical: 9,
-    paddingHorizontal: 28,
+    paddingVertical: 8,
+    paddingHorizontal: 30,
     borderRadius: 35,
     
   },
   filterText: {
     color: '#fff',
     fontSize: 16,
+    marginLeft: 2
   },
   cardFooter: {
     width: "100%",
+    backgroundColor: 'transparent',
     padding: 15,
     justifyContent: 'center',
     borderBottomWidth:0.5,
-    backgroundColor: 'white',
 
+  },
+  sheetCards: {
+    width: "100%",
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    padding: 15,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomWidth:0.5,
   },
   button: {
     borderColor: '#4CAF50',
